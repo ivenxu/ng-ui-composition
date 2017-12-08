@@ -1,0 +1,18 @@
+server:
+  port: 9090
+
+ribbon:
+    eureka:
+        enabled: false
+
+zuul:
+  routes:
+    billing:
+      url: http://localhost:5050/billing
+    care:
+      path: /**
+      url: http://localhost:4040
+
+spring:
+  application:
+    name: zuul-client-proxy

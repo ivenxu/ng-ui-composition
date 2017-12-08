@@ -66,8 +66,8 @@
       meta: meta,
       packages: packages,
       bundles:{
-        'care-bundle.js': care_bundle,
-        'billing-bundle.js': billing_bundle
+        './care/care-bundle.js': care_bundle,
+        './billing/billing-bundle.js': billing_bundle
       },
       transpiler: 'plugin-babel'
     };

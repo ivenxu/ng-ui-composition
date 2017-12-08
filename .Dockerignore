@@ -1,0 +1,5 @@
+**
+!dist
+!*.Dockerfile
+!*.yml
+!src/client-proxy/target

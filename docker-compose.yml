@@ -1,0 +1,36 @@
+version: "3"
+services:
+  care:
+    build:
+      context: .
+      dockerfile: ./care.Dockerfile
+    image: nginx-care:1
+    container_name: nginx-care-cn
+    ports:
+      - "4040:80"
+    networks:
+      - devnetwork
+  billing:
+    build:
+      context: .
+      dockerfile: ./billing.Dockerfile
+    image: nginx-billing:1
+    container_name: nginx-billing-cn
+    ports:
+      - "5050:80"
+    networks:
+      - devnetwork
+  zuul:
+    build:
+      context: .
+      dockerfile: ./zuul.Dockerfile
+      args:
+        JAR_FILE: ./src/client-proxy/target/client-proxy-0.0.1-SNAPSHOT.jar
+    image: zuul-proxy:1
+    container_name: zuul-proxy-cn
+    ports:
+      - "9090:9090"
+    networks:
+      - devnetwork
+networks:
+  devnetwork:

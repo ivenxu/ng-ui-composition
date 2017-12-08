@@ -62,7 +62,7 @@ gulp.task('clean', function () {
 
 gulp.task('build-js', function(){
     builder
-    .bundle('dist/**/*.js - [dist/**/systemjs*.js] - [dist/billing/**/*.js]', 'dist/care-bundle.js', { minify: false, sourceMaps: true })
+    .bundle('dist/**/*.js - [dist/**/systemjs*.js] - [dist/billing/**/*.js]', 'dist/care/care-bundle.js', { minify: false, sourceMaps: true })
     .then(function() {
         console.log('Build care complete');
       })
@@ -71,7 +71,7 @@ gulp.task('build-js', function(){
         console.log(err);
       });
       builder
-      .bundle('dist/billing/*.js', 'dist/billing-bundle.js', { minify: false, sourceMaps: true })
+      .bundle('dist/billing/*.js', 'dist/billing/billing-bundle.js', { minify: false, sourceMaps: true })
       .then(function() {
           console.log('Build billing complete');
         })
