@@ -2,24 +2,26 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Hell SystemJs</title>
+  <title>Client UI Composition Demo</title>
   <base href="/">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.css">
   <!-- js -->
     <!-- load the dependencies -->
     <script src="node_modules/core-js/client/shim.min.js"></script>
     <script src="node_modules/zone.js/dist/zone.js"></script>
     <script src="node_modules/reflect-metadata/Reflect.js"></script>
+    <script src="node_modules/jquery/dist/jquery.js"></script>
+    <script src="node_modules/bootstrap/dist/js/bootstrap.js"></script>
 
     <!-- load our angular app with systemjs -->
     <script src="node_modules/systemjs/dist/system.src.js"></script>
     <!-- <script src="systemjs.config.js"></script> -->
 </head>
 <body>
-  <customer-summary-selector>Loading Customer Summary</customer-summary-selector>
-  <dashboard-selector>Loading dashboard</dashboard-selector>
+ <app-root-selector />
 </body>
   <script>
   System.import('/share/systemjs/systemjs.config.js').then(function() {

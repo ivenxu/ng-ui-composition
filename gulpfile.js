@@ -38,6 +38,8 @@ gulp.task("copy-vendor", function(){
         "node_modules/systemjs/dist/system.src.js",
         "node_modules/@angular/**/*",
         "node_modules/rxjs/**/*",
+        "node_modules/jquery/dist/**/*",
+        "node_modules/bootstrap/dist/**/*",
         "node_modules/systemjs-plugin-babel/**/*"], {base: "./"})
         .pipe(gulp.dest("dist"));
 });
@@ -79,6 +81,7 @@ gulp.task('build-js', function(){
           console.log('Build error in billing');
           console.log(err);
         });
+
 });
 
 gulp.task('default', ['clean'], function(callback) {

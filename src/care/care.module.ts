@@ -5,6 +5,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { CustomerSummaryComponent } from './customersummary/customer-summary.component';
 import { BillingModule } from '../billing/billing.module';
 import { ShareModule } from '../share/share.module';
+import { CareAppComponent } from './app/care-app.component';
 
 
 @NgModule({
@@ -13,9 +14,9 @@ import { ShareModule } from '../share/share.module';
       BrowserModule,
       BillingModule,
       ShareModule],
-    declarations: [ DashboardComponent, CustomerSummaryComponent ],
-    exports: [ DashboardComponent, CustomerSummaryComponent ],
+    declarations: [  CareAppComponent, DashboardComponent, CustomerSummaryComponent,  ],
+    exports: [ CareAppComponent, DashboardComponent, CustomerSummaryComponent ],
     providers: [ ],
-    bootstrap: [ DashboardComponent, CustomerSummaryComponent ]
+    bootstrap: [ CareAppComponent ]
   })
 export class CareModule {}

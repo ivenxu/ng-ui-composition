@@ -19,12 +19,13 @@
     var packages = {
       // 'main.js':                       { defaultExtension: 'js' },               
       'care': { 
-        defaultExtension: 'js',
-        meta: {
-          'billing/*': {
-            build: false
-          }
-        }
+        defaultExtension: 'js'
+        // ,
+        // meta: {
+        //   'billing/*': {
+        //     build: false
+        //   }
+        // }
       },
       'billing': { 
         defaultExtension: 'js'
@@ -46,8 +47,9 @@
       'router-deprecated',
       'upgrade',
     ];
-    var care_bundle = ['main','care','care/care.module.js'];
+    var care_bundle = ['main','care', 'care/care.module.js'];
     var billing_bundle = ['billing','billing/billing.module.js'];
+    // var share_bundle = ['share', 'share/share.module.js'];
     // Individual files (~300 requests):
     function packIndex(pkgName) {
       packages['@angular/'+pkgName] = { main: 'index.js', defaultExtension: 'js' };
@@ -68,6 +70,8 @@
       bundles:{
         './care/care-bundle.js': care_bundle,
         './billing/billing-bundle.js': billing_bundle
+        // ,
+        // './share/share-bundle.js': share_bundle
       },
       transpiler: 'plugin-babel'
     };
