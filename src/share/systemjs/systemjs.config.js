@@ -6,6 +6,10 @@
       'care': 'dist/care', // 'dist',
       'billing': 'dist/billing',
       '@angular': 'node_modules/@angular',
+      '@angular/animations': 'node_modules/@angular/animations/bundles/animations.umd.min.js',
+      '@angular/animations/browser':'node_modules/@angular/animations/bundles/animations-browser.umd.js',
+      '@angular/platform-browser/animations': 'node_modules/@angular/platform-browser/bundles/platform-browser-animations.umd.js',
+      '@swimlane/ngx-charts': 'node_modules/@swimlane/ngx-charts',
       'rxjs': 'node_modules/rxjs',
       'plugin-babel': 'node_modules/systemjs-plugin-babel/plugin-babel.js',
       'systemjs-babel-build': 'node_modules/systemjs-plugin-babel/systemjs-babel-browser.js'
@@ -13,19 +17,21 @@
     var meta = {
       '@angular/*': {
         build: false
+      },
+      '@swimlane/ngx-charts/*': {
+        build: false
+      },
+      'd3': {
+        build: false
+      },
+      'd3-*': {
+        build: false
       }
     };
     // packages tells the System loader how to load when no filename and/or no extension
-    var packages = {
-      // 'main.js':                       { defaultExtension: 'js' },               
+    var packages = {             
       'care': { 
         defaultExtension: 'js'
-        // ,
-        // meta: {
-        //   'billing/*': {
-        //     build: false
-        //   }
-        // }
       },
       'billing': { 
         defaultExtension: 'js'
@@ -33,7 +39,20 @@
       'share': {
         defaultExtension: 'js'
       },
-      'rxjs': { defaultExtension: 'js' }
+      'rxjs': { defaultExtension: 'js' },
+      '@swimlane/ngx-charts': {
+        main: 'release/index.js',
+        defaultExtension: 'js'
+       }
+      //  ,
+      //  '@angular/animations/browser': {
+      //    main: 'bundles/animations-browser.umd.js',
+      //    defaultExtension: 'js'
+      //  },
+      //  '@angular/platform-browser/animations': {
+      //   main: 'bundles/platform-browser-animations.umd.js',
+      //   defaultExtension: 'js'
+      //  }
     };
     var ngPackageNames = [
       'common',
@@ -45,33 +64,63 @@
       'platform-browser-dynamic',
       'router',
       'router-deprecated',
-      'upgrade',
+      'upgrade'
+      // ,
+      // 'animations'
     ];
+    var d3PackageNames = [
+      'd3',
+      'd3-array',
+      'd3-brush',
+      'd3-collection',
+      'd3-color',
+      'd3-dispatch',
+      'd3-drag',
+      'd3-ease',
+      'd3-force',
+      'd3-format',
+      'd3-hierarchy',
+      'd3-interpolate',
+      'd3-path',
+      'd3-quadtree',
+      'd3-scale',
+      'd3-selection',
+      'd3-shape',
+      'd3-transition',
+      'd3-time',
+      'd3-time-format',
+      'd3-timer'
+    ]
     var care_bundle = ['main','care', 'care/care.module.js'];
     var billing_bundle = ['billing','billing/billing.module.js'];
-    // var share_bundle = ['share', 'share/share.module.js'];
-    // Individual files (~300 requests):
     function packIndex(pkgName) {
+      packages[pkgName] = { main: 'index.js', defaultExtension: 'js' };
+    }
+    function mapD3(pkgName) {
+      map[pkgName] = 'node_modules/' + pkgName;
+    }
+    // Individual files (~300 requests):
+    function packNgIndex(pkgName) {
       packages['@angular/'+pkgName] = { main: 'index.js', defaultExtension: 'js' };
     }
     // Bundled (~40 requests):
-    function packUmd(pkgName) {
+    function packNgUmd(pkgName) {
       packages['@angular/'+pkgName] = { main: 'bundles/' + pkgName + '.umd.js', defaultExtension: 'js' };
     }
     // Most environments should use UMD; some (Karma) need the individual index files
-    var setPackageConfig = System.packageWithIndex ? packIndex : packUmd;
+    var setPackageConfig = System.packageWithIndex ? packNgIndex : packNgUmd;
     // Add package entries for angular packages
     ngPackageNames.forEach(setPackageConfig);
+    d3PackageNames.forEach(packIndex);
+    d3PackageNames.forEach(mapD3);
     var config = {
-       baseURL: "/",
+       baseURL: '/',
       map: map,
       meta: meta,
       packages: packages,
       bundles:{
         './care/care-bundle.js': care_bundle,
         './billing/billing-bundle.js': billing_bundle
-        // ,
-        // './share/share-bundle.js': share_bundle
       },
       transpiler: 'plugin-babel'
     };

@@ -37,9 +37,12 @@ gulp.task("copy-vendor", function(){
         "node_modules/reflect-metadata/Reflect.js",
         "node_modules/systemjs/dist/system.src.js",
         "node_modules/@angular/**/*",
+        "node_modules/@swimlane/ngx-charts/**/*",
+        "node_modules/d3-**/**/*",
         "node_modules/rxjs/**/*",
         "node_modules/jquery/dist/**/*",
         "node_modules/bootstrap/dist/**/*",
+        "node_modules/startbootstrap-sb-admin-2/dist/**/*",
         "node_modules/systemjs-plugin-babel/**/*"], {base: "./"})
         .pipe(gulp.dest("dist"));
 });
