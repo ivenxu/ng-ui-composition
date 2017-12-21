@@ -44,15 +44,7 @@
         main: 'release/index.js',
         defaultExtension: 'js'
        }
-      //  ,
-      //  '@angular/animations/browser': {
-      //    main: 'bundles/animations-browser.umd.js',
-      //    defaultExtension: 'js'
-      //  },
-      //  '@angular/platform-browser/animations': {
-      //   main: 'bundles/platform-browser-animations.umd.js',
-      //   defaultExtension: 'js'
-      //  }
+
     };
     var ngPackageNames = [
       'common',
@@ -65,8 +57,6 @@
       'router',
       'router-deprecated',
       'upgrade'
-      // ,
-      // 'animations'
     ];
     var d3PackageNames = [
       'd3',
