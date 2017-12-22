@@ -62,24 +62,15 @@
       'd3',
       'd3-array',
       'd3-brush',
-      'd3-collection',
       'd3-color',
-      'd3-dispatch',
-      'd3-drag',
-      'd3-ease',
       'd3-force',
       'd3-format',
       'd3-hierarchy',
       'd3-interpolate',
-      'd3-path',
-      'd3-quadtree',
       'd3-scale',
       'd3-selection',
       'd3-shape',
-      'd3-transition',
-      'd3-time',
       'd3-time-format',
-      'd3-timer'
     ]
     var care_bundle = ['main','care', 'care/care.module.js'];
     var billing_bundle = ['billing','billing/billing.module.js'];
@@ -87,7 +78,8 @@
       packages[pkgName] = { main: 'index.js', defaultExtension: 'js' };
     }
     function mapD3(pkgName) {
-      map[pkgName] = 'node_modules/' + pkgName;
+      map[pkgName] = 'node_modules/d3';
+      packages[pkgName] = { main: 'build/d3.js', defaultExtension: 'js' };
     }
     // Individual files (~300 requests):
     function packNgIndex(pkgName) {
