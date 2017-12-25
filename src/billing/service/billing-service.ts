@@ -17,7 +17,7 @@ export class BillingService {
         for (let i = 0; i < billNumber; i++) {
             const bill: Bill = {
                 id: this.randomIntBetween(accountId, accountId + 1000),
-                dueAmount: this.randomBetween(minBillAmount, maxBillAmount),
+                dueAmount: parseFloat(this.randomBetween(minBillAmount, maxBillAmount).toFixed(2)),
                 issueDate: lastIssueDate,
                 dueDate: this.calulateDueDate(lastIssueDate),
                 status: BillStatus[BillStatus[this.randomIntBetween(0,3)]],
@@ -37,7 +37,7 @@ export class BillingService {
 
     lastMonthIssueDate(current: Date): Date {
         let d = new Date(current);
-        d.setMonth(current.getMonth() - 1);
+        d.setDate(0);//d.setMonth(current.getMonth() - 1);
         return d;
     }
 

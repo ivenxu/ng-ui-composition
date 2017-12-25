@@ -1,22 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { BillingService, Bill } from '../service/billing-service';
+import { BillingService, Bill, BillStatus } from '../service/billing-service';
 
 @Component({
     selector: 'bills-chart-selector',
     template: `
       <ngx-charts-bar-vertical
         [view]="view"
-        [scheme]="colorScheme"
-        [results]="single"
-        [gradient]="gradient"
+        [scheme]="chartModel.colorScheme"
+        [results]="chartModel.data"
         [xAxis]="showXAxis"
         [yAxis]="showYAxis"
         [barPadding]="barPadding"
-        [showXAxisLabel]="showXAxisLabel"
-        [showYAxisLabel]="showYAxisLabel"
-        [xAxisLabel]="xAxisLabel"
-        [yAxisLabel]="yAxisLabel"
         (select)="onSelect($event)">
       </ngx-charts-bar-vertical>
     `
@@ -24,41 +19,16 @@ import { BillingService, Bill } from '../service/billing-service';
   export class BillsChartComponent implements OnInit {
     constructor(private billingService: BillingService) {}
 
-    single = [
-        {
-          "name": "Germany",
-          "value": 8940000,
-          "id": 1234
-        },
-        {
-          "name": "USA",
-          "value": 5000000,
-          "id": 2233
-        },
-        {
-          "name": "France",
-          "value": 7200000,
-          "id": 3333
-        }
-      ];;
-    multi: any[];
+    chartModel: any;
   
     view: any[] = [700, 400];
   
     // options
     showXAxis = true;
     showYAxis = true;
-    gradient = false;
-    showXAxisLabel = true;
-    xAxisLabel = 'Country';
-    showYAxisLabel = true;
-    yAxisLabel = 'Population';
-    barPadding = 60;
+    barPadding = 16;
     bills: Bill[];
   
-    colorScheme = {
-      domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']
-    };
 
     ngOnInit() {
       this.getBills();
@@ -67,12 +37,42 @@ import { BillingService, Bill } from '../service/billing-service';
     getBills() {
       this.billingService.getRecentBills(123, 'Gas').subscribe(bills=>{
         console.log(bills);
-        this.bills = bills;
+        let chartModel = { data:[], colorScheme: { domain:[]} };
+        for(let bill of bills) {
+          chartModel.data.push({
+            name: this.formatDate(bill.issueDate),
+            value: bill.dueAmount
+          });
+          chartModel.colorScheme.domain.push(this.colorizeStatus(bill.status));
+        }
+        this.chartModel = chartModel;
       });
     }
     
     onSelect(event) {
       console.log(event);
+    }
+
+    colorizeStatus(status: BillStatus): string {
+      switch(status) {
+        case BillStatus.Overdue:
+          return '#ff0000';
+        case BillStatus.Dispute:
+          return '#ffff00';
+        default:
+          return '#008000';
+      }
+    }
+
+    formatDate(date: Date): string{
+      let now = new Date();
+      const auLocale = 'en-au';
+      let shortMonth = date.toLocaleString(auLocale, { month: 'short'});
+      if (now.getFullYear() == date.getFullYear()) {
+        return shortMonth;
+      } else {
+        return shortMonth + '-' + date.toLocaleString(auLocale, {year:'2-digit'});
+      }
     }
   }
   
