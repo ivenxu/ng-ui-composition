@@ -52,40 +52,7 @@
        }
 
     };
-    var rxjsPackageNames = [
-      'Observable',
-      'observable/ArrayObservable',
-      'observable/EmptyObservable',
-      'observable/ScalarObservable',
-      'observable/merge',
-      'observable/of',
-      'operator/share',
-      'operator/merge',
-      'operators/merge',
-      'operators/mergeAll',
-      'operators/multicast',
-      'operators/refCount',
-      'operators/share',
-      'Subject',
-      'Subscriber',
-      'Subscription',
-      'SubjectSubscription',
-      'add/observable/fromEvent',
-      'add/operator/debounceTime',
-      'util/noop',
-      'util/root',
-      'util/toSubscriber',
-      'util/pipe',
-      'util/ObjectUnsubscribedError',
-      'util/isArray',
-      'util/isFunction',
-      'util/isObject',
-      'util/tryCatch',
-      'util/errorObject',
-      'util/isScheduler',
-      'symbol/observable',
-      'symbol/rxSubscriber'
-    ];
+    
     var careBundle = ['main','care', 'care/care.module.js'];
     var billingBundle = ['billing','billing/billing.module.js'];
 
@@ -127,9 +94,7 @@
       map[pkgName] = 'node_modules/d3';
       packages[pkgName] = { main: 'build/d3.js', defaultExtension: 'js' };
     }
-    function mapRxjs(pkgName) {
-      map['rxjs/'+ pkgName] = 'node_modules/rxjs/bundles/Rx.js';
-    }
+
     // Individual files (~300 requests):
     function packNgIndex(pkgName) {
       packages['@angular/'+pkgName] = { main: 'index.js', defaultExtension: 'js' };
@@ -144,7 +109,6 @@
     ngPackageNames.forEach(setPackageConfig);
     d3PackageNames.forEach(packIndex);
     d3PackageNames.forEach(mapD3);
-    // rxjsPackageNames.forEach(mapRxjs);
     var config = {
       baseURL: '/',
       map: map,

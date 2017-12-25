@@ -76,7 +76,7 @@ gulp.task('build-js', function(){
         console.log(err);
       });
       builder
-      .bundle('dist/billing/*.js', 'dist/billing/billing-bundle.js', { minify: false, sourceMaps: true })
+      .bundle('dist/billing/**/*.js', 'dist/billing/billing-bundle.js', { minify: false, sourceMaps: true })
       .then(function() {
           console.log('Build billing complete');
         })
