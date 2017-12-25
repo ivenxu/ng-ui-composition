@@ -21,6 +21,10 @@
       '@swimlane/ngx-charts/*': {
         build: false
       },
+      'rxjs/*': {
+        build: false,
+        esModule: true
+      },
       'd3': {
         build: false
       },
@@ -39,13 +43,57 @@
       'share': {
         defaultExtension: 'js'
       },
-      'rxjs': { defaultExtension: 'js' },
       '@swimlane/ngx-charts': {
         main: 'release/index.js',
         defaultExtension: 'js'
+       },
+       'rxjs': {
+         defaultExtension: 'js'
        }
 
     };
+    var rxjsPackageNames = [
+      'Observable',
+      'observable/ArrayObservable',
+      'observable/EmptyObservable',
+      'observable/ScalarObservable',
+      'observable/merge',
+      'observable/of',
+      'operator/share',
+      'operator/merge',
+      'operators/merge',
+      'operators/mergeAll',
+      'operators/multicast',
+      'operators/refCount',
+      'operators/share',
+      'Subject',
+      'Subscriber',
+      'Subscription',
+      'SubjectSubscription',
+      'add/observable/fromEvent',
+      'add/operator/debounceTime',
+      'util/noop',
+      'util/root',
+      'util/toSubscriber',
+      'util/pipe',
+      'util/ObjectUnsubscribedError',
+      'util/isArray',
+      'util/isFunction',
+      'util/isObject',
+      'util/tryCatch',
+      'util/errorObject',
+      'util/isScheduler',
+      'symbol/observable',
+      'symbol/rxSubscriber'
+    ];
+    var careBundle = ['main','care', 'care/care.module.js'];
+    var billingBundle = ['billing','billing/billing.module.js'];
+
+    var bundles = {
+      './care/care-bundle.js': careBundle,
+      './billing/billing-bundle.js': billingBundle
+    };
+
     var ngPackageNames = [
       'common',
       'compiler',
@@ -71,15 +119,16 @@
       'd3-selection',
       'd3-shape',
       'd3-time-format',
-    ]
-    var care_bundle = ['main','care', 'care/care.module.js'];
-    var billing_bundle = ['billing','billing/billing.module.js'];
+    ];
     function packIndex(pkgName) {
       packages[pkgName] = { main: 'index.js', defaultExtension: 'js' };
     }
     function mapD3(pkgName) {
       map[pkgName] = 'node_modules/d3';
       packages[pkgName] = { main: 'build/d3.js', defaultExtension: 'js' };
+    }
+    function mapRxjs(pkgName) {
+      map['rxjs/'+ pkgName] = 'node_modules/rxjs/bundles/Rx.js';
     }
     // Individual files (~300 requests):
     function packNgIndex(pkgName) {
@@ -95,15 +144,13 @@
     ngPackageNames.forEach(setPackageConfig);
     d3PackageNames.forEach(packIndex);
     d3PackageNames.forEach(mapD3);
+    // rxjsPackageNames.forEach(mapRxjs);
     var config = {
-       baseURL: '/',
+      baseURL: '/',
       map: map,
       meta: meta,
       packages: packages,
-      bundles:{
-        './care/care-bundle.js': care_bundle,
-        './billing/billing-bundle.js': billing_bundle
-      },
+      bundles: bundles,
       transpiler: 'plugin-babel'
     };
     System.config(config);

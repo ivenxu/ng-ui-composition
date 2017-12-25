@@ -3,13 +3,13 @@ import { CommonModule }       from '@angular/common';
 import { CustomerUsageComponent } from './customerusage/customer-usage.component';
 import { CareBillingComponent } from './care-billing-dash/care-billing-dash.component';
 import { BillsChartComponent } from './billschart/bills-chart.component';
- import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { BillingService } from './service/billing-service';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
 
 
 @NgModule({
     imports: [ 
-      CommonModule
-      ,
+      CommonModule,
       NgxChartsModule 
     ],
     declarations: [ 
@@ -20,6 +20,6 @@ import { BillsChartComponent } from './billschart/bills-chart.component';
       CustomerUsageComponent, 
       CareBillingComponent, 
       BillsChartComponent ],
-    providers:    [ ]
+    providers: [ BillingService ]
   })
 export class BillingModule {}
