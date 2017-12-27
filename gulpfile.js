@@ -42,6 +42,7 @@ gulp.task("copy-vendor", function(){
         "node_modules/rxjs/**/*",
         "node_modules/jquery/dist/**/*",
         "node_modules/bootstrap/dist/**/*",
+        "node_modules/font-awesome/**/*",
         "node_modules/startbootstrap-sb-admin-2/dist/**/*",
         "node_modules/systemjs-plugin-babel/**/*"], {base: "./"})
         .pipe(gulp.dest("dist"));

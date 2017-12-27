@@ -56,7 +56,7 @@ import { BillingService, Bill, BillStatus } from '../service/billing-service';
     colorizeStatus(status: BillStatus): string {
       switch(status) {
         case BillStatus.Overdue:
-          return '#ff0000';
+          return '#A52A2A';
         case BillStatus.Dispute:
           return '#ffa500';
         default:
