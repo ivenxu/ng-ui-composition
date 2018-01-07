@@ -1,1 +1,6 @@
-<h2>Custome Summary placeholder</h2>
+<div *ngIf="customer">
+    <i class="fa fa-bolt" style="font-size: 18px;" [style.color]="customer.electricityEnabled ? 'Aqua': 'gray'" aria-hidden="true"></i>
+    <i class="fa fa-fire" style="font-size: 18px;" [style.color]="customer.gasEnabled ? 'Coral': 'gray'" aria-hidden="true"></i>
+    <span style="padding-left: 0.5em; padding-right: 0.5em;color: MediumSeaGreen;">{{customer.fullName}}</span>
+    <span style="color:olive">{{customer.address}}</span>
+</div>

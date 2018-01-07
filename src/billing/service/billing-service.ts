@@ -29,30 +29,30 @@ export class BillingService {
         return of(bills);
     }
 
-    lastDayofPreviousMonth(): Date {
+    private lastDayofPreviousMonth(): Date {
         let d = new Date();
         d.setDate(0);
         return d;
     }
 
-    lastMonthIssueDate(current: Date): Date {
+    private lastMonthIssueDate(current: Date): Date {
         let d = new Date(current);
-        d.setDate(0);//d.setMonth(current.getMonth() - 1);
+        d.setDate(0);
         return d;
     }
 
-    calulateDueDate(issueDate: Date): Date {
+    private calulateDueDate(issueDate: Date): Date {
         const dueDays = 15;
         let d = new Date(issueDate);
         d.setDate(issueDate.getDate() + dueDays);
         return d;
     }
 
-    randomBetween(min: number, max: number): number {
+    private randomBetween(min: number, max: number): number {
         return Math.random()*(max-min+1)+min;
     }
 
-    randomIntBetween(min: number, max: number): number {
+    private randomIntBetween(min: number, max: number): number {
         return Math.floor(this.randomBetween(min, max));
     }
 }

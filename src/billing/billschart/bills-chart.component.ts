@@ -58,7 +58,7 @@ import { BillingService, Bill, BillStatus } from '../service/billing-service';
         case BillStatus.Overdue:
           return '#A52A2A';
         case BillStatus.Dispute:
-          return '#ffa500';
+          return '#f0ad4e';
         default:
           return '#008000';
       }
