@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { SupplyAccount, AccountStatus, FuelType } from '../service/customer.service';
+import { CustomerContext } from '../../share/service/customer-context.service';
 
 @Component({
     selector: 'account-summary-selector',
@@ -25,7 +26,7 @@ import { SupplyAccount, AccountStatus, FuelType } from '../service/customer.serv
                 </div>
             </div>
         </div>
-        <a href="#">
+        <a href="#" (click)="select();false">
             <div class="panel-footer">
                 <span class="pull-left">View Details</span>
                 <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -35,14 +36,17 @@ import { SupplyAccount, AccountStatus, FuelType } from '../service/customer.serv
     </div>`,
     styles: [
         `.selected {
-            border-style: double !important;
-            border-color: GoldenRod;
+            outline-style: groove;
+            outline-color: firebrick;
         }`,
         `.elec-icon {
             color: Aqua;
         }`,
         `.gas-icon {
             color: Coral;
+        }`,
+        `.disabled-icon {
+            color: gray;
         }`,
         `.fuel-bg-cycle {
             padding: 0.1em;
@@ -58,15 +62,39 @@ import { SupplyAccount, AccountStatus, FuelType } from '../service/customer.serv
     ]
   })
   export class AccountSummaryComponent implements OnInit {
-    @Input() account: SupplyAccount;
-    @Input() selected: boolean;
+    _account: SupplyAccount;
+    _selected: boolean;
     boxClasses: {};
     fuelTypeClasses: {};
     AccountStatus = AccountStatus;
+    constructor(private customerContext: CustomerContext) {}
 
     ngOnInit(): void {
-        this.calcBoxClasses();
-        this.calcFuelTypeClasses();
+        this.reapplyClasses();
+    }
+
+    @Input()
+    set account(account: SupplyAccount){
+        this._account = account;
+        this.reapplyClasses();
+    }
+
+    get account(): SupplyAccount {
+        return this._account
+    }
+
+    @Input() 
+    set selected(selected: boolean) {
+        this._selected = selected;
+        this.reapplyClasses();
+    }
+
+    get selected(): boolean {
+        return this._selected;
+    }
+
+    select(): void {
+        this.customerContext.setCurrentAccountId(this.account.id);
     }
     
     private calcBoxClasses(): void {
@@ -80,12 +108,18 @@ import { SupplyAccount, AccountStatus, FuelType } from '../service/customer.serv
         };
     }
 
+    private reapplyClasses(): void {
+        this.calcBoxClasses();
+        this.calcFuelTypeClasses();
+    }
+
     private calcFuelTypeClasses(): void {
         this.fuelTypeClasses = {
             'fa-bolt': FuelType.Electricity == this.account.fuelType,
             'fa-fire': FuelType.Gas == this.account.fuelType,
-            'elec-icon': FuelType.Electricity == this.account.fuelType,
-            'gas-icon': FuelType.Gas == this.account.fuelType,
+            'elec-icon': (this.account.enabled && FuelType.Electricity == this.account.fuelType),
+            'gas-icon': (this.account.enabled && FuelType.Gas == this.account.fuelType),
+            'disabled-icon': !this.account.enabled
         };
     }
   }

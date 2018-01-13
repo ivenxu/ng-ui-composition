@@ -12,7 +12,7 @@ import { CustomerContext } from '../../share/service/customer-context.service';
     constructor(private customerContext: CustomerContext, private customerService: CustomerService) {}
 
     ngOnInit(): void {
-      this.customerContext.currentCustomerId.subscribe(customerId =>{
+      this.customerContext.currentCustomerIdSubject.subscribe(customerId =>{
         this.customerService.customerById(customerId).subscribe(customer =>{this.customer=customer});
       });
     }

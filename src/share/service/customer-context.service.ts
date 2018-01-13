@@ -5,14 +5,22 @@ import { Subject } from "rxjs/Subject";
 @Injectable() 
 export class CustomerContext {
 
-    currentCustomerId = new Subject<number>();
-    currentAccountId = new Subject<number>();
+    currentCustomerIdSubject = new Subject<number>();
+    currentAccountIdSubject = new Subject<number>();
+    currentCustomerId: number;
+    currentAccountId: number;
 
     setCurrentCustomerId(customerId: number) {
-        this.currentCustomerId.next(customerId);
+        if (customerId  != this.currentCustomerId) {
+            this.currentCustomerId = customerId;
+            this.currentCustomerIdSubject.next(customerId);
+        }
     }
 
     setCurrentAccountId(accountId: number) {
-        this.currentAccountId.next(accountId);
+        if (accountId != this.currentAccountId) {
+            this.currentAccountId = accountId;
+            this.currentAccountIdSubject.next(accountId);
+        }
     }
 }
