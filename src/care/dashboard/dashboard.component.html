@@ -1,8 +1,10 @@
 <div class="container-fluid" style="margin-top:1em;">
     <div class="row">
-        <div class="col-lg-3 col-md-6" *ngFor="let acct of accounts">
-            <account-summary-selector [account]="acct" [selected]="acct==selectedAccount" ></account-summary-selector>
-        </div>
+        <ng-container #accountsContainer>
+            <div class="col-lg-3 col-md-6" *ngFor="let acct of accounts">
+                <account-summary-selector [account]="acct" [selected]="acct==selectedAccount" ></account-summary-selector>
+            </div>
+        </ng-container>
         <div class="col-lg-3 col-md-6">
             <div class="panel panel-yellow">
                 <div class="panel-heading">

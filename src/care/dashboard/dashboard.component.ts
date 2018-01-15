@@ -1,4 +1,4 @@
-import { Component, OnInit }      from '@angular/core';
+import { Component, OnInit, ViewContainerRef, ViewChild }      from '@angular/core';
 import { SupplyAccount, CustomerService } from '../service/customer.service';
 import { CustomerContext } from '../../share/service/customer-context.service';
 
@@ -9,12 +9,16 @@ import { CustomerContext } from '../../share/service/customer-context.service';
   export class DashboardComponent implements OnInit {
     accounts: SupplyAccount[];
     selectedAccount: SupplyAccount;
+    @ViewChild('accountsContainer', { read: ViewContainerRef }) accountContainer: ViewContainerRef;
 
-    constructor(private customerContext: CustomerContext, private customerService: CustomerService) {}
+    constructor(private customerContext: CustomerContext, private customerService: CustomerService) {
+      this.accounts = [];
+    }
 
     ngOnInit(): void {
       this.customerContext.currentCustomerIdSubject.subscribe(custId => {
         this.customerService.principleAccountsByCustomerId(custId).subscribe(accts =>{
+          this.accountContainer.clear();
           this.accounts = accts;
           this.selectDefaultAccount(this.accounts);
         });

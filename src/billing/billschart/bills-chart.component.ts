@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BillingService, Bill, BillStatus } from '../service/billing-service';
+import { CustomerContext } from '../../share/service/customer-context.service';
 
 @Component({
     selector: 'bills-chart-selector',
@@ -17,9 +18,9 @@ import { BillingService, Bill, BillStatus } from '../service/billing-service';
     `
   })
   export class BillsChartComponent implements OnInit {
-    constructor(private billingService: BillingService) {}
+    constructor(private billingService: BillingService, private customerContext: CustomerContext) {}
 
-    chartModel: any;
+    chartModel = { data:[], colorScheme: { domain:[]} };
   
     view: any[] = [700, 400];
   
@@ -31,11 +32,13 @@ import { BillingService, Bill, BillStatus } from '../service/billing-service';
   
 
     ngOnInit() {
-      this.getBills();
+      this.customerContext.currentAccountIdSubject.subscribe(acctId => {
+        this.getBills(acctId);
+      });
     }
 
-    getBills() {
-      this.billingService.getRecentBills(123, 'Gas').subscribe(bills=>{
+    private getBills(accountId: number) {
+      this.billingService.getRecentBills(accountId).subscribe(bills=>{
         console.log(bills);
         let chartModel = { data:[], colorScheme: { domain:[]} };
         for(let bill of bills) {
