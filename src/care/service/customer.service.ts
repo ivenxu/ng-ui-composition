@@ -60,6 +60,162 @@ export class CustomerService {
         return of(accounts);
     }
 
+    notificationsYTD(customerId: number): Observable<Notification[]> {
+        let notifications = [
+            {
+                id: this.randomIntBetween(1, 10000),
+                customerId: customerId,
+                type: NotificationType.BadWeather,
+                content: 'Heavy snow in the customer living area.',
+                date: this.randomDateInAYear()
+            },
+            {
+                id: this.randomIntBetween(1, 10000),
+                customerId: customerId,
+                type: NotificationType.BadWeather,
+                content: 'Storm! Heavy storm! Crazy storm!',
+                date: this.randomDateInAYear()
+            },
+            {
+                id: this.randomIntBetween(1, 10000),
+                customerId: customerId,
+                type: NotificationType.BadWeather,
+                content: 'Heavy rain, floading possible.',
+                date: this.randomDateInAYear()
+            },
+            {
+                id: this.randomIntBetween(1, 10000),
+                customerId: customerId,
+                type: NotificationType.Outage,
+                content: 'Outage during 7.00 am to 9 am.',
+                date: this.randomDateInAYear()
+            },
+            {
+                id: this.randomIntBetween(1, 10000),
+                customerId: customerId,
+                type: NotificationType.Outage,
+                content: 'Outage whole day.',
+                date: this.randomDateInAYear()
+            },
+            {
+                id: this.randomIntBetween(1, 10000),
+                customerId: customerId,
+                type: NotificationType.Outage,
+                content: 'Outage whole week.',
+                date: this.randomDateInAYear()
+            },
+            {
+                id: this.randomIntBetween(1, 10000),
+                customerId: customerId,
+                type: NotificationType.Outage,
+                content: 'Outage whole day due to maintenance.',
+                date: this.randomDateInAYear()
+            },
+            {
+                id: this.randomIntBetween(1, 10000),
+                customerId: customerId,
+                type: NotificationType.Broadcast,
+                content: 'Rude customer, be careful.',
+                date: this.randomDateInAYear()
+            },
+            {
+                id: this.randomIntBetween(1, 10000),
+                customerId: customerId,
+                type: NotificationType.Broadcast,
+                content: 'Ombudsman',
+                date: this.randomDateInAYear()
+            },
+            {
+                id: this.randomIntBetween(1, 10000),
+                customerId: customerId,
+                type: NotificationType.Broadcast,
+                content: 'VIP customer.',
+                date: this.randomDateInAYear()
+            }
+        ];
+        notifications.sort((a, b)=>{return b.date.getTime() - b.date.getTime()});
+
+        return of(notifications);
+    }
+
+    contactsYTD(customerId: number): Observable<Contact[]> {
+        let contacts = [
+            {
+                id: this.randomIntBetween(1, 10000),
+                customerId: customerId,
+                type: ContactType.InBound,
+                description: 'Complain about outage of last night.',
+                communicateType: CommunicateType[CommunicateType[this.randomIntBetween(0, 2)]],
+                contactName: mockNames[this.randomIntBetween(0, mockNames.length-1)],
+                csrName: mockNames[this.randomIntBetween(0, mockNames.length-1)],
+                date: this.randomDateInAYear()
+            },
+            {
+                id: this.randomIntBetween(1, 10000),
+                customerId: customerId,
+                type: ContactType.InBound,
+                description: 'Dispute the last bill.',
+                communicateType: CommunicateType[CommunicateType[this.randomIntBetween(0, 2)]],
+                contactName: mockNames[this.randomIntBetween(0, mockNames.length-1)],
+                csrName: mockNames[this.randomIntBetween(0, mockNames.length-1)],
+                date: this.randomDateInAYear()
+            },
+            {
+                id: this.randomIntBetween(1, 10000),
+                customerId: customerId,
+                type: ContactType.InBound,
+                description: 'Report hazard.',
+                communicateType: CommunicateType[CommunicateType[this.randomIntBetween(0, 2)]],
+                contactName: mockNames[this.randomIntBetween(0, mockNames.length-1)],
+                csrName: mockNames[this.randomIntBetween(0, mockNames.length-1)],
+                date: this.randomDateInAYear()
+            },
+            {
+                id: this.randomIntBetween(1, 10000),
+                customerId: customerId,
+                type: ContactType.OutBound,
+                description: 'Prompt to pay the overdue bill.',
+                communicateType: CommunicateType[CommunicateType[this.randomIntBetween(0, 2)]],
+                contactName: mockNames[this.randomIntBetween(0, mockNames.length-1)],
+                csrName: mockNames[this.randomIntBetween(0, mockNames.length-1)],
+                date: this.randomDateInAYear()
+            },
+            {
+                id: this.randomIntBetween(1, 10000),
+                customerId: customerId,
+                type: ContactType.OutBound,
+                description: 'Offering payment plan.',
+                communicateType: CommunicateType[CommunicateType[this.randomIntBetween(0, 2)]],
+                contactName: mockNames[this.randomIntBetween(0, mockNames.length-1)],
+                csrName: mockNames[this.randomIntBetween(0, mockNames.length-1)],
+                date: this.randomDateInAYear()
+            },
+            {
+                id: this.randomIntBetween(1, 10000),
+                customerId: customerId,
+                type: ContactType.OutBound,
+                description: 'Outage notify.',
+                communicateType: CommunicateType[CommunicateType[this.randomIntBetween(0, 2)]],
+                contactName: mockNames[this.randomIntBetween(0, mockNames.length-1)],
+                csrName: mockNames[this.randomIntBetween(0, mockNames.length-1)],
+                date: this.randomDateInAYear()
+            },
+            {
+                id: this.randomIntBetween(1, 10000),
+                customerId: customerId,
+                type: ContactType.OutBound,
+                description: 'Annual Survey.',
+                communicateType: CommunicateType[CommunicateType[this.randomIntBetween(0, 2)]],
+                contactName: mockNames[this.randomIntBetween(0, mockNames.length-1)],
+                csrName: mockNames[this.randomIntBetween(0, mockNames.length-1)],
+                date: this.randomDateInAYear()
+            }
+        ];
+        contacts.sort((a, b)=>{return b.date.getTime() - a.date.getTime()});
+
+        return of(contacts);
+    }
+
     private generateAddress(): string {
         let propertyNumber = this.randomIntBetween(1, 100);
         let street = mockStreetNames[this.randomIntBetween(0, mockStreetNames.length-1)];
@@ -77,6 +233,12 @@ export class CustomerService {
 
     private randomIntBetween(min: number, max: number): number {
         return Math.floor(this.randomBetween(min, max));
+    }
+
+    private randomDateInAYear(): Date {
+        const aYearOfMs = 365*24*3600*1000;
+        let now = new Date();
+        return new Date(now.getTime() - this.randomIntBetween(0, aYearOfMs));
     }
 }
 
@@ -119,6 +281,42 @@ export interface SupplyAccount {
     lifeSupport: boolean;
 }
 
+export enum ContactType {
+    InBound,
+    OutBound
+}
+
+export enum CommunicateType {
+    Phone,
+    Email,
+    OnlineChat
+}
+
+export interface Contact {
+    id: number;
+    customerId: number;
+    contactName: string;
+    csrName: string;
+    description: string;
+    type: ContactType;
+    communicateType: CommunicateType;
+    date: Date;
+}
+
+export interface Notification {
+    id: number;
+    customerId: number;
+    type: NotificationType;
+    content: string;
+    date: Date;
+}
+
+export enum NotificationType {
+    Supervisor,
+    Broadcast,
+    BadWeather,
+    Outage
+}
 
 function electricityEnabled(customerId: number): boolean {
     return (0 == customerId % 5) || (2==customerId % 5) || (3==customerId % 5);

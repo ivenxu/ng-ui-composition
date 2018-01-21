@@ -13,6 +13,7 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { CustomerService, CustomerLocator} from './service/customer.service';
 import { CustomerContext } from '../share/service/customer-context.service';
 import { AccountSummaryComponent } from './accountsummary/account-summary.component';
+import { ContactSummary } from './contactsummary/contact-summary.component';
 
 
 @NgModule({
@@ -24,8 +25,8 @@ import { AccountSummaryComponent } from './accountsummary/account-summary.compon
       NgxChartsModule,
       BillingModule,
       ShareModule],
-    declarations: [  CareAppComponent, DashboardComponent, CustomerSummaryComponent, TopBarComponent, AccountSummaryComponent ],
-    exports: [ CareAppComponent, DashboardComponent, CustomerSummaryComponent, TopBarComponent, AccountSummaryComponent ],
+    declarations: [  CareAppComponent, DashboardComponent, CustomerSummaryComponent, TopBarComponent, AccountSummaryComponent, ContactSummary ],
+    exports: [ CareAppComponent, DashboardComponent, CustomerSummaryComponent, TopBarComponent, AccountSummaryComponent, ContactSummary ],
     providers: [ CustomerContext, CustomerLocator, CustomerService ],
     bootstrap: [ CareAppComponent ]
   })
