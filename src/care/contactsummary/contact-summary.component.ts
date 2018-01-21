@@ -14,7 +14,7 @@ import { CustomerService, Contact, ContactType, CommunicateType } from "../servi
                 </div>
                 <div class="col-xs-9 text-right">
                     <div class="huge">{{contactsYTD?.length}}</div>
-                    <div>Contacts YTD</div>
+                    <div>Contacts</div>
                 </div>
             </div>
         </div>
@@ -28,8 +28,8 @@ import { CustomerService, Contact, ContactType, CommunicateType } from "../servi
     </div>
     <div class="panel panel-default" *ngIf="contactsYTD && detailMode">
         <div class="panel-heading">
-            <i class="fa fa-comments fa-fw"></i>
-            <a href="#" (click)="toggleViewMode();false" class="pull-right"><i class="fa fa-arrow-circle-left"></i>Back</a>
+            <i class="fa fa-comments fa-fw"></i> Contacts
+            <a href="#" (click)="toggleViewMode();false" class="pull-right"><i class="fa fa-arrow-circle-left"></i> Back</a>
         </div>
         <div class="panel-body">
             <ul class="chat">

@@ -14,6 +14,7 @@ import { CustomerService, CustomerLocator} from './service/customer.service';
 import { CustomerContext } from '../share/service/customer-context.service';
 import { AccountSummaryComponent } from './accountsummary/account-summary.component';
 import { ContactSummary } from './contactsummary/contact-summary.component';
+import { NotificationSummary } from './notificatonsummary/notification-summary.component';
 
 
 @NgModule({
@@ -25,8 +26,8 @@ import { ContactSummary } from './contactsummary/contact-summary.component';
       NgxChartsModule,
       BillingModule,
       ShareModule],
-    declarations: [  CareAppComponent, DashboardComponent, CustomerSummaryComponent, TopBarComponent, AccountSummaryComponent, ContactSummary ],
-    exports: [ CareAppComponent, DashboardComponent, CustomerSummaryComponent, TopBarComponent, AccountSummaryComponent, ContactSummary ],
+    declarations: [  CareAppComponent, DashboardComponent, CustomerSummaryComponent, TopBarComponent, AccountSummaryComponent, ContactSummary, NotificationSummary ],
+    exports: [ CareAppComponent, DashboardComponent, CustomerSummaryComponent, TopBarComponent, AccountSummaryComponent, ContactSummary, NotificationSummary ],
     providers: [ CustomerContext, CustomerLocator, CustomerService ],
     bootstrap: [ CareAppComponent ]
   })
