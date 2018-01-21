@@ -29,7 +29,7 @@ import { CustomerService, Contact, ContactType, CommunicateType } from "../servi
     <div class="panel panel-default" *ngIf="contactsYTD && detailMode">
         <div class="panel-heading">
             <i class="fa fa-comments fa-fw"></i>
-            <a href="#" (click)="toggleViewMode();false" class="pull-right"><i class="fa fa-reply"></i>Back</a>
+            <a href="#" (click)="toggleViewMode();false" class="pull-right"><i class="fa fa-arrow-circle-left"></i>Back</a>
         </div>
         <div class="panel-body">
             <ul class="chat">
