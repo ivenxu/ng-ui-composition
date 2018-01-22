@@ -2,6 +2,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/observable';
 import { of } from 'rxjs/observable/of';
+import { Subject } from 'rxjs/Subject';
 
 @Injectable()
 export class BillingService {
@@ -62,6 +63,19 @@ export class BillingService {
 
     private randomIntBetween(min: number, max: number): number {
         return Math.floor(this.randomBetween(min, max));
+    }
+}
+
+@Injectable()
+export class BillingContext {
+    selectedBill: Bill;
+    selectedBillSubject = new Subject<Bill>();
+
+    selectBill(bill: Bill): void {
+        if (bill  != this.selectedBill) {
+            this.selectedBill = bill;
+            this.selectedBillSubject.next(bill);
+        }
     }
 }
 
