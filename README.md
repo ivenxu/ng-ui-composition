@@ -8,16 +8,16 @@ It's quite common when people talking microservices, they just talking about ser
 A dashboard can provide users a comprehensive overview of the entities they are working on. For example, in the Customer Care solution, the dashboard show different pieces of information from different services. 
 
 ## build
-# build client
+### build client
 ```
 npm run gulp
 ```
-# build client-proxy
+### build client-proxy
 ```
 cd client-proxy
 mvnw clean install
 ```
-# build dockers
+### build dockers
 ```
-docker compose
+docker-compose up --build -d
 ```
