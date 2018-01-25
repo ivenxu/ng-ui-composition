@@ -4,9 +4,9 @@ import { Component }      from '@angular/core';
     selector: 'care-billing-dash-selector',
     template: 
     `
-    <div class="row" style="height: 400px;">
+    <div class="row" style="min-height: 400px;">
       <div class="col-xs-12 col-md-8">
-        <bills-chart-selector></bills-chart-selector>
+        <bills-chart-selector height="400"></bills-chart-selector>
       </div>
       <div class="col-xs-12 col-md-4">
         <bill-detail-selector></bill-detail-selector>

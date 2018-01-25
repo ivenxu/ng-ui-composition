@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BillingService, Bill, BillStatus, BillingContext } from '../service/billing-service';
 import { CustomerContext } from '../../share/service/customer-context.service';
@@ -6,14 +6,16 @@ import { CustomerContext } from '../../share/service/customer-context.service';
 @Component({
     selector: 'bills-chart-selector',
     template: `
-      <ngx-charts-bar-vertical
-        [scheme]="chartModel.colorScheme"
-        [results]="chartModel.data"
-        [xAxis]="showXAxis"
-        [yAxis]="showYAxis"
-        [barPadding]="barPadding"
-        (select)="onSelect($event)">
-      </ngx-charts-bar-vertical>
+      <div [style.height]="height + 'px'">
+        <ngx-charts-bar-vertical
+          [scheme]="chartModel.colorScheme"
+          [results]="chartModel.data"
+          [xAxis]="showXAxis"
+          [yAxis]="showYAxis"
+          [barPadding]="barPadding"
+          (select)="onSelect($event)">
+        </ngx-charts-bar-vertical>
+      </div>
     `
   })
   export class BillsChartComponent implements OnInit {
@@ -28,6 +30,8 @@ import { CustomerContext } from '../../share/service/customer-context.service';
     showYAxis = true;
     barPadding = 16;
     bills: Bill[];
+    @Input()
+    height: number;
   
 
     ngOnInit() {
